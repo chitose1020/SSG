@@ -24,7 +24,7 @@ const markdownToHtml = (markdown) => {
   })
   .replace(/ {2,}$/gm, `<br>`)
   .replace(/\r?\n/g, "")
-  .replace(/^(?!<)(.+)$/gm, (_, text) => {return `<p>${text}</p>`})}\n`;
+  .replace(/^(?!<.*>)(.+)$/gm, (_, text) => {return `<p>${text.trim()}</p>`})}\n`;
 }
 return html;
 }
