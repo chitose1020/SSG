@@ -23,6 +23,7 @@ const markdownToHtml = (markdown) => {
   .replace(/\n/g, "")
   .replace(/^(?!<)(.+)$/gm, (_, text) => {return `<p>${text}</p>`})}\n`;
 }
+return html;
 }
 
 const buildArticle = async (filePath) => {
