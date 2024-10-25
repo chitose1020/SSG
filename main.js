@@ -4,8 +4,23 @@ const path = require("path");
 const markdownToHtml = (markdown) => {
   let id = 0;
   const toc = [];
-  const paragraphs = markdown.split(/\n{2,}/);
-  console.log(paragraphs);
+  const html = markdown
+  .replace(/^# (.*$)/gm, (_, text) => {
+    toc.push({ id: `heading-${id + 1}`, text: text, el: "h2" });
+    return `<h2 id="${++id}">${text}</h2>`;
+  })
+  .replace(/^## (.*$)/gm, (_, text) => {
+    toc.push({ id: `heading-${id + 1}`, text: text, el: "h3" });
+    return `<h3 id="${++id}">${text}</h3>`;
+  })
+  .replace(/\[(.*?)\]\((.*?)\)/g, (_, text, url) => {
+    return `<a href="${url}">${text}</a>`;
+  })
+  .replace(/^(?!<h\d|<a|<\/p>)(.+)$/gm, (_, text) => {
+    return `<p>${text}</p>`;
+  })
+  .replace(/ {2,}\n/g, `<br>`);
+  return html;
 };
 
 const buildArticle = async (filePath) => {
