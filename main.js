@@ -16,11 +16,11 @@ const markdownToHtml = (markdown) => {
     .replace(/\[(.*?)\]\((.*?)\)/g, (_, text, url) => {
       return `<a href="${url}">${text}</a>`;
     })
+    .replace(/ {2,}\n/g, '<br>\n')
+    .replace(/\n{2,}/g, '</p><p>')
     .replace(/^(?!<h\d|<a|<\/p>)(.+)$/gm, (_, text) => {
       return `<p>${text}</p>`;
-    })
-    .replace(/ {2,}\n/g, '<br>\n')
-    .replace(/\n{2,}/g, '</p><p>');
+    });
   return html;
 };
 
