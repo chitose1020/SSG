@@ -4,7 +4,7 @@ const path = require("path");
 const markdownToHtml = (markdown) => {
   let id = 0;
   const toc = [];
-  const paragraphs = markdown.split(/\n{2,}/g);
+  const paragraphs = markdown.split(/\r?\n{2,}/g);
   let html = ""
   for(const paragraph of paragraphs){
   html += `${paragraph
@@ -23,7 +23,7 @@ const markdownToHtml = (markdown) => {
     return `<a href="${url}">${text}</a>`;
   })
   .replace(/ {2,}$/gm, `<br>`)
-  .replace(/\n/g, "")
+  .replace(/\r?\n/g, "")
   .replace(/^(?!<)(.+)$/gm, (_, text) => {return `<p>${text}</p>`})}\n`;
 }
 return html;
