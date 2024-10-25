@@ -16,6 +16,9 @@ const markdownToHtml = (markdown) => {
     toc.push({ id: `heading-${id + 1}`, text: text, el: "h3" });
     return `<h3 id="${++id}">${text}</h3>`;
   })
+  .replace(/^#{3,} (.*$)/gm, (_, text) => {
+    return `<h4>${text}</h4>`
+  })
   .replace(/\[(.*?)\]\((.*?)\)/g, (_, text, url) => {
     return `<a href="${url}">${text}</a>`;
   })
