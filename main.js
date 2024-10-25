@@ -18,7 +18,9 @@ const markdownToHtml = (markdown) => {
     })
     .replace(/^(?!<h\d|<a|<\/p>)(.+)$/gm, (_, text) => {
       return `<p>${text}</p>`;
-    });
+    })
+    .replace(/ {2,}\n/g, '<br>\n')
+    .replace(/\n{2,}/g, '</p><p>');
   return html;
 };
 
