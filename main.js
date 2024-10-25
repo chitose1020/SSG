@@ -16,10 +16,7 @@ const markdownToHtml = (markdown) => {
   .replace(/\[(.*?)\]\((.*?)\)/g, (_, text, url) => {
     return `<a href="${url}">${text}</a>`;
   })
-  .replace(/ {2,}$/gm, `<br>`)
-  .replace(/^(?!<h\d|<a|<\/p>)(.+)$/gm, (_, text) => {
-    return `<p>${text}</p>`;
-  });
+  .replace(/ {2,}$/gm, `<br>`);
   return html;
 };
 
