@@ -4,7 +4,10 @@ const path = require("path");
 const markdownToHtml = (markdown) => {
   let id = 0;
   const toc = [];
-  const html = markdown
+  const paragraphs = markdown.split(/\n{2,}/g);
+  let html = ""
+  for(const paragraph of paragraphs){
+  html += `<p>${paragraph
   .replace(/^# (.*$)/gm, (_, text) => {
     toc.push({ id: `heading-${id + 1}`, text: text, el: "h2" });
     return `<h2 id="${++id}">${text}</h2>`;
@@ -16,9 +19,11 @@ const markdownToHtml = (markdown) => {
   .replace(/\[(.*?)\]\((.*?)\)/g, (_, text, url) => {
     return `<a href="${url}">${text}</a>`;
   })
-  .replace(/ {2,}$/gm, `<br>`);
-  return html;
-};
+  .replace(/ {2,}$/gm, `<br>`)
+  .replace(/\n/g, "")
+  .replace(/^(?!<)(.+)$/gm, (_, text) => {return `<p>${text}</p>`})}</p>`;
+}
+}
 
 const buildArticle = async (filePath) => {
   const content = await fs.promises.readFile(filePath, "utf-8");
