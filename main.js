@@ -7,7 +7,7 @@ const markdownToHtml = (markdown) => {
   const paragraphs = markdown.split(/\n{2,}/g);
   let html = ""
   for(const paragraph of paragraphs){
-  html += `<p>${paragraph
+  html += `${paragraph
   .replace(/^# (.*$)/gm, (_, text) => {
     toc.push({ id: `heading-${id + 1}`, text: text, el: "h2" });
     return `<h2 id="${++id}">${text}</h2>`;
@@ -21,7 +21,7 @@ const markdownToHtml = (markdown) => {
   })
   .replace(/ {2,}$/gm, `<br>`)
   .replace(/\n/g, "")
-  .replace(/^(?!<)(.+)$/gm, (_, text) => {return `<p>${text}</p>`})}</p>`;
+  .replace(/^(?!<)(.+)$/gm, (_, text) => {return `<p>${text}</p>`})}\n;
 }
 }
 
