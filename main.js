@@ -35,7 +35,7 @@ const buildArticle = async (filePath) => {
           <meta name="viewport" content="width=device-width, initial-scale=1.0">
           <meta name="description" content="">
           <link rel="shortcut icon" href="/public/img/png/favicon.png" type="image/x-icon">
-          <link rel="stylesheet" href="/public/css/common.css>
+          <link rel="stylesheet" href="/public/css/common.css">
           <script src="/public/js/common.js" defer></script>
           <title></title>
       </head>
