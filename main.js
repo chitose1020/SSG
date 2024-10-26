@@ -24,6 +24,7 @@ const markdownToHtml = (markdown) => {
       return `<a href="${url}">${text}</a>`
     })
     .replace(/^> (.*)/gm, (_, text) => {return `<blockquote>${text}</blockquote>`})
+    .replace(/`([^`]+?)`/g, (_, text) => {return `<code>${text}</code>`})
     .replace(/ {2,}$/, "<br>");
     if(/^</.test(processed)){
       if (paragraphContent) {
