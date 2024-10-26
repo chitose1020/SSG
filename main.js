@@ -3,30 +3,26 @@ const path = require("path");
 
 const markdownToHtml = (markdown) => {
   let id = 0;
-  const toc = [];
-  const paragraphs = markdown.split(/\r?\n{2,}/g);
-  let html = ""
+  const paragraphs = markdown.split(/\r?\n/g);
+  let html = "";
   for(const paragraph of paragraphs){
-  html += `${paragraph
-  .replace(/^# (.*$)/gm, (_, text) => {
-    toc.push({ id: `heading-${id + 1}`, text: text, el: "h2" });
-    return `<h2 id="${++id}">${text}</h2>`;
-  })
-  .replace(/^## (.*$)/gm, (_, text) => {
-    toc.push({ id: `heading-${id + 1}`, text: text, el: "h3" });
-    return `<h3 id="${++id}">${text}</h3>`;
-  })
-  .replace(/^#{3,} (.*$)/gm, (_, text) => {
-    return `<h4>${text}</h4>`
-  })
-  .replace(/\[(.*?)\]\((.*?)\)/g, (_, text, url) => {
-    return `<a href="${url}">${text}</a>`;
-  })
-  .replace(/ {2,}$/gm, `<br>`)
-  .replace(/\r?\n/g, "")
-  .replace(/^(?!<.*>)(.+)$/gm, (_, text) => {return `<p>${text.trim()}</p>`})}\n`;
-}
-return html;
+    let process = paragraph
+    .replace(/^#(.*$)/, (_, text) => {
+      id++;
+      return `<h2 id="${id}">${text}</h2>`;
+    })
+    .replace(/^##(.*$)/, (_, text) => {
+      id++;
+      return `<h3 id="${id}">${text}</h3>`;
+    })
+    .replace(/^#{3,}(.*$)/, (_, text) => {
+      return `<h4>${text}</h4>`;
+    })
+    .replace(/\[(.*?)\]\((.*?)\)/g, (_, text, url) => {
+      return `<a href="${url}">${text}</a>`
+    });
+  }
+  return html;
 }
 
 const buildArticle = async (filePath) => {
