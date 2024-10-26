@@ -21,7 +21,8 @@ const markdownToHtml = (markdown) => {
     })
     .replace(/\[(.*?)\]\((.*?)\)/g, (_, text, url) => {
       return `<a href="${url}">${text}</a>`
-    });
+    })
+    .replace(/ {2,}$/, "<br>");
     if (/^</.test(processed)) {
       if (paragraphContent) {
         html += `<p>${paragraphContent.trim()}</p>`;
