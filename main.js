@@ -3,7 +3,8 @@ const path = require("path");
 
 const markdownToHtml = (markdown) => {
   let id = 0;
-  const paragraphs = markdown.split(/\r?\n/g);
+  const paragraphs = markdown
+  .split(/\r?\n/g);
   let html = "";
   let paragraphContent = "";
   for(const paragraph of paragraphs){
@@ -30,7 +31,7 @@ const markdownToHtml = (markdown) => {
       }
       html += processed;
     } else {
-      paragraphContent += `${processed} `;
+      paragraphContent += processed;
     }
   }
   if(paragraphContent){
