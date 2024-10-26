@@ -47,6 +47,7 @@ const buildArticle = async (filePath) => {
   const htmlContent = markdownToHtml(content);
   const config = await fs.promises.readFile(filePath.replace(".md", ".json"), "utf-8");
   const configs = JSON.parse(config);
+  const title = configs.title || "";
   console.log(configs);
 
   const html = `
@@ -58,12 +59,12 @@ const buildArticle = async (filePath) => {
           <link rel="shortcut icon" href="/public/img/png/favicon.png" type="image/x-icon">
           <link rel="stylesheet" href="/public/css/common.css">
           <script src="/public/js/common.js" defer></script>
-          <title></title>
+          <title>${title}</title>
       </head>
       <body>
         <header></header>
         <main>
-          <h1 id="title"></h1>
+          <h1 id="title">${title}</h1>
           <div id="content">${htmlContent}</div>
         </main>
         <footer></footer>
