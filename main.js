@@ -7,8 +7,19 @@ const markdownToHtml = (markdown) => {
   .split(/\r?\n/g);
   let html = "";
   let paragraphContent = "";
+  let inCodeFlag
   for(const paragraph of paragraphs){
-    let processed = paragraph
+    let processed = paragraph;
+    if(/^```/.test(processed)){
+      if(inCodeFlag){
+        processed = `</code></pre>`;
+      }else{
+        processed = `<pre><code>`
+      }
+      inCodeFlag = !inCodeFlag;
+    }
+    else{
+    processed
     .replace(/^# (.*$)/, (_, text) => {
       id++;
       return `<h2 id="${id}">${text}</h2>`;
@@ -35,6 +46,7 @@ const markdownToHtml = (markdown) => {
     } else {
       paragraphContent += processed;
     }
+  }
   }
   if(paragraphContent){
     html += `<p>${paragraphContent.trim()}</p>`;
