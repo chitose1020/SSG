@@ -17,9 +17,8 @@ const markdownToHtml = (markdown) => {
         processed = `<pre><code>`
       }
       inCodeFlag = !inCodeFlag;
-    }
-    else{
-    processed
+    }else{
+    processed = processed
     .replace(/^# (.*$)/, (_, text) => {
       id++;
       return `<h2 id="${id}">${text}</h2>`;
