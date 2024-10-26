@@ -11,11 +11,7 @@ const markdownToHtml = (markdown) => {
   for(const paragraph of paragraphs){
     let processed = paragraph;
     if(/^```/.test(processed)){
-      if(inCodeFlag){
-        processed = `</code></pre>`;
-      }else{
-        processed = `<pre><code>`
-      }
+      processed = inCodeFlag ? `</code></pre>` : `<pre><code>`;
       inCodeFlag = !inCodeFlag;
     }else{
     processed = processed
