@@ -7,7 +7,7 @@ const markdownToHtml = (markdown) => {
   let html = "";
   let paragraphContent = "";
   for(const paragraph of paragraphs){
-    let process = paragraph
+    let processed = paragraph
     .replace(/^#(.*$)/, (_, text) => {
       id++;
       return `<h2 id="${id}">${text}</h2>`;
