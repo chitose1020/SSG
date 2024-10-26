@@ -5,6 +5,7 @@ const markdownToHtml = (markdown) => {
   let id = 0;
   const paragraphs = markdown.split(/\r?\n/g);
   let html = "";
+  let paragraphContent = "";
   for(const paragraph of paragraphs){
     let process = paragraph
     .replace(/^#(.*$)/, (_, text) => {
@@ -21,6 +22,18 @@ const markdownToHtml = (markdown) => {
     .replace(/\[(.*?)\]\((.*?)\)/g, (_, text, url) => {
       return `<a href="${url}">${text}</a>`
     });
+    if (/^</.test(processed)) {
+      if (paragraphContent) {
+        html += `<p>${paragraphContent.trim()}</p>`;
+        paragraphContent = "";
+      }
+      html += processed;
+    } else {
+      paragraphContent += `${processed} `;
+    }
+  }
+  if(paragraphContent){
+    html += `<p>${paragraphContent.trim()}</p>`;
   }
   return html;
 }
