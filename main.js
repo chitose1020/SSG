@@ -45,7 +45,7 @@ const buildArticle = async (filePath) => {
   const fileName = path.basename(filePath, ".md") + ".html";
   const outputPath = path.join(__dirname, "../article", fileName);
   const htmlContent = markdownToHtml(content);
-  const config = await fs.promises.readFile(path.basename(filePath, ".md") + ".json", "utf-8");
+  const config = await fs.promises.readFile(filePath.replace(".md", ".json"), "utf-8");
   console.log(config);
 
   const html = `
