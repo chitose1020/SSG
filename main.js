@@ -8,15 +8,15 @@ const markdownToHtml = (markdown) => {
   let paragraphContent = "";
   for(const paragraph of paragraphs){
     let processed = paragraph
-    .replace(/^#(.*$)/, (_, text) => {
+    .replace(/^# (.*$)/, (_, text) => {
       id++;
       return `<h2 id="${id}">${text}</h2>`;
     })
-    .replace(/^##(.*$)/, (_, text) => {
+    .replace(/^## (.*$)/, (_, text) => {
       id++;
       return `<h3 id="${id}">${text}</h3>`;
     })
-    .replace(/^#{3,}(.*$)/, (_, text) => {
+    .replace(/^# {3,}(.*$)/, (_, text) => {
       return `<h4>${text}</h4>`;
     })
     .replace(/\[(.*?)\]\((.*?)\)/g, (_, text, url) => {
