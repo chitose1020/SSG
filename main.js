@@ -16,7 +16,7 @@ const markdownToHtml = (markdown) => {
       id++;
       return `<h3 id="${id}">${text}</h3>`;
     })
-    .replace(/^# {3,}(.*$)/, (_, text) => {
+    .replace(/^#{3,} (.*$)/, (_, text) => {
       return `<h4>${text}</h4>`;
     })
     .replace(/\[(.*?)\]\((.*?)\)/g, (_, text, url) => {
